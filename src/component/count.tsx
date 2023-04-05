@@ -5,9 +5,13 @@ const Count = () => {
   return (
     <div>
       <h1>{count}</h1>
-      <button onClick={() => setCount(count + 1)}>+</button>
+      <button className="border-red-500" onClick={() => setCount(count + 1)}>
+        +
+      </button>
       <button onClick={() => setCount(count - 1)}>-</button>
-      <button onClick={() => setCount(count * 2)}>multiply</button>
+      <button className="text-yellow-500" onClick={() => setCount(count * 2)}>
+        multiply
+      </button>
       <button onClick={() => setCount(count / 2)}>/2</button>
     </div>
   );
