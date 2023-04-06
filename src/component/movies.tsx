@@ -45,8 +45,10 @@ interface IMovie {
 export default function Movies({
   movies,
   filter,
+  pagination,
 }: {
   movies: IMovie[];
+  pagination: any;
   filter: string;
 }) {
   console.log(movies);
@@ -88,7 +90,7 @@ export default function Movies({
             </div>
           ))}
       </div>
-      <MyPagination />
+      <MyPagination pagination={pagination} />
     </div>
   );
 }

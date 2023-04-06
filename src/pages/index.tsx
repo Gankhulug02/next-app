@@ -43,8 +43,15 @@ interface IMovie {
   };
 }
 
-export default function Home({ movies }: { movies: IMovie[] }) {
+export default function Home({
+  movies,
+  pagination,
+}: {
+  movies: IMovie[];
+  pagination: any;
+}) {
   const [filter, setFilter] = useState("");
+  const [page, setPage] = useState(1);
 
   return (
     <div>
@@ -57,16 +64,18 @@ export default function Home({ movies }: { movies: IMovie[] }) {
       <div>
         <MyNav setFilter={setFilter} />
         <div className="flex justify-center bg-gray-100 pt-12">
-          <Movies movies={movies} filter={filter} />
+          <Movies movies={movies} filter={filter} pagination={pagination} />
         </div>
       </div>
     </div>
   );
 }
-export async function getServerSideProps() {
-  const res = await fetch("http://localhost:8022/movies");
+
+export async function getServerSideProps(ctx: any) {
+  const res = await fetch(`http://localhost:8022/movies?limit=20&page=${page}`);
   const data = await res.json();
+  const pagination = data.pagination;
   return {
-    props: { movies: data.movies },
+    props: { movies: data.movies, pagination },
   };
 }

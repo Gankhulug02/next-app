@@ -17,4 +17,6 @@ const Count = () => {
   );
 };
 
+export async function getStaticProps() {}
+
 export default Count;
