@@ -3,45 +3,49 @@ import { useState } from "react";
 import Count from "@/component/count";
 import Movies from "@/component/movies";
 import Link from "next/link";
+import MyNav from "@/component/nav";
 
 interface IMovie {
-  plot: String;
-  genres: [String];
-  runtime: Number;
-  cast: [String];
-  num_mflix_comments: Number;
-  title: String;
-  fullplot: String;
-  languages: [String];
+  _id: string;
+  plot: string;
+  genres: [string];
+  runtime: number;
+  cast: [string];
+  num_mflix_comments: number;
+  poster: string;
+  title: string;
+  fullplot: string;
+  languages: [string];
   released: Date;
-  directors: [String];
-  rated: String;
+  directors: [string];
+  rated: string;
   awards: {
-    wins: Number;
-    nominations: Number;
-    text: String;
+    wins: number;
+    nominations: number;
+    text: string;
   };
-  lastupdated: String;
-  year: Number;
+  lastupdated: string;
+  year: number;
   imdb: {
-    rating: Number;
-    votes: Number;
-    id: Number;
+    rating: number;
+    votes: number;
+    id: number;
   };
   countries: [];
-  type: String;
-  tomates: {
+  type: string;
+  tomatoes: {
     viewer: {
-      rating: Number;
-      numReviws: Number;
-      meter: Number;
+      rating: number;
+      numReviews: number;
+      meter: number;
     };
     lastUpdated: Date;
   };
 }
 
 export default function Home({ movies }: { movies: IMovie[] }) {
-  const [count, setCount] = useState(0);
+  const [filter, setFilter] = useState("");
+
   return (
     <div>
       <Head>
@@ -51,22 +55,16 @@ export default function Home({ movies }: { movies: IMovie[] }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div>
-        <h1>Welcome to our website by net.js</h1>
-        <Link
-          href="/about"
-          target="_blank"
-          className="text-orange-500 text-2xl"
-        >
-          About
-        </Link>
-        <Count />
-        <Movies movies={movies} />
+        <MyNav setFilter={setFilter} />
+        <div className="flex justify-center bg-gray-100 pt-12">
+          <Movies movies={movies} filter={filter} />
+        </div>
       </div>
     </div>
   );
 }
 export async function getServerSideProps() {
-  const res = await fetch("http://localhost:8020/movies");
+  const res = await fetch("http://localhost:8022/movies");
   const data = await res.json();
   return {
     props: { movies: data.movies },

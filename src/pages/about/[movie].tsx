@@ -3,12 +3,11 @@ import { useRouter } from "next/router";
 
 const About = () => {
   const asd = useRouter();
-  const sda = asd.query.movie;
-  const id: String = "1234";
+  const id = asd.query.movie;
   return (
     <div>
       About
-      <h1>{sda}</h1>
+      <h1>{id}</h1>
     </div>
   );
 };
