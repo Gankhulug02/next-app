@@ -72,7 +72,10 @@ export default function Home({
 }
 
 export async function getServerSideProps(ctx: any) {
-  const res = await fetch(`http://localhost:8022/movies?limit=20&page=${page}`);
+  const { limit, page } = ctx.query;
+  const res = await fetch(
+    `http://localhost:8022/movies?limit=${limit || 10}&page=${page || 1}`
+  );
   const data = await res.json();
   const pagination = data.pagination;
   return {

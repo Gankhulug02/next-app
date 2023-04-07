@@ -51,10 +51,9 @@ export default function Movies({
   pagination: any;
   filter: string;
 }) {
-  console.log(movies);
   return (
-    <div>
-      <div className="grid grid-cols-5 gap-7 max-w-6xl min-h-screen bg-white p-5">
+    <div className="bg-white pb-7">
+      <div className="grid grid-cols-5 gap-7 max-w-6xl min-h-screen  p-5">
         {movies
           .filter((movie) =>
             movie.title.toLowerCase().includes(filter.toLowerCase())

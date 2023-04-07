@@ -1,28 +1,30 @@
-import * as React from "react";
-import Typography from "@mui/material/Typography";
+import React, { useState } from "react";
+import { useRouter } from "next/router";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
+import { Box } from "@mui/system";
 
-export default function MyPagination({
-  pagination,
-  setPage,
-  page,
-}: {
-  pagination: any;
-  setPage: any;
-  page: any;
-}) {
-  console.log("asdf", pagination);
-  const { pageCount, total } = pagination;
+export default function MyPagination({ pagination }: { pagination: any }) {
+  const router = useRouter();
+  const { pageCount, total, page } = pagination;
+  console.log(page);
+
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
-    setPage(value);
+    // setPage(value);
     console.log(value);
+    router.push(`http://localhost:3000/?&page=${value}`, ``, {
+      scroll: false,
+    });
   };
 
   return (
-    <Stack spacing={2}>
-      {/* <Typography>Page: {page}</Typography> */}
-      <Pagination count={pageCount} page={page} onChange={handleChange} />
+    <Stack>
+      <Pagination
+        count={pageCount}
+        page={page}
+        onChange={handleChange}
+        sx={{ marginX: "auto" }}
+      />
     </Stack>
   );
 }
