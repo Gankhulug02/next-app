@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import MyPagination from "@/component/pagination";
+import { useRouter } from "next/router";
 
 interface IMovie {
   _id: string;
@@ -51,8 +52,10 @@ export default function Movies({
   pagination: any;
   filter: string;
 }) {
+  const router = useRouter();
+
   return (
-    <div className="bg-white pb-7">
+    <div className="bg-white pb-7 ">
       <div className="grid grid-cols-5 gap-7 max-w-6xl min-h-screen  p-5">
         {movies
           .filter((movie) =>
@@ -61,7 +64,12 @@ export default function Movies({
           .map((movie) => (
             <div
               key={movie._id}
-              className="max-w-fit max-h-96 overflow-hidden rounded-lg  "
+              className="max-w-fit max-h-96 overflow-hidden rounded-lg "
+              onClick={() => {
+                router.push(`http://localhost:3000/movies/${movie._id}`, ``, {
+                  scroll: false,
+                });
+              }}
             >
               <div className=" items-center h-4/5	">
                 <Image

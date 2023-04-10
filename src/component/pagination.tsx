@@ -7,11 +7,8 @@ import { Box } from "@mui/system";
 export default function MyPagination({ pagination }: { pagination: any }) {
   const router = useRouter();
   const { pageCount, total, page } = pagination;
-  console.log(page);
 
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
-    // setPage(value);
-    console.log(value);
     router.push(`http://localhost:3000/?&page=${value}`, ``, {
       scroll: false,
     });
